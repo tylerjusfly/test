@@ -6,6 +6,7 @@ import { inputValidators } from "@/utils/formValidation";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { notifyError, notifySuccess } from "@/lib/notifications/notifySuccess";
 
 const Login = () => {
   const router = useRouter();
@@ -21,9 +22,27 @@ const Login = () => {
     },
   });
 
-  const loginUserHandler = (data) => {
-    console.log(data);
-    router.replace("/dashboard");
+  const loginUserHandler = async (data) => {
+    try {
+      const apiRes = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: data.email, password: data.password }),
+      });
+
+      const getResp = await apiRes.json();
+      console.log(getResp, "apiRes");
+
+      if (getResp.admin) {
+        router.replace("/admin");
+      } else {
+        router.replace("/dashboard");
+      }
+    } catch (error) {
+      notifyError("Login Failed");
+    }
   };
 
   return (
