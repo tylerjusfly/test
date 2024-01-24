@@ -15,7 +15,6 @@ async function getJobPost() {
 
 const AdminDashboard = async () => {
   const jobPosting = await getJobPost();
-  // const router = useRouter
 
   return (
     <Fragment>

@@ -20,7 +20,7 @@ const JobItem = ({ job }) => {
   }
 
   return (
-    <div className="border py-[1rem] px-[2.5rem] rounded-[.5rem] border-color-grey-1 w-[42rem] bg-color-white shadow-md">
+    <div className="border py-[1rem] px-[2.5rem] rounded-[.5rem] border-color-grey-1 w-[42rem] bg-color-white shadow-md mb-7">
       <div className="flex items-center justify-between w-full">
         <p>{job.title}</p>
         <FaEdit className="w-[2.2rem] h-[2.2rem] cursor-pointer" />

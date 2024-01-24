@@ -17,6 +17,8 @@ model Post {
   available Boolean @default(true)
   salary    String?
   type      String?
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
 
   @@map(name: "posts")
 }
@@ -24,8 +26,9 @@ model Post {
 model User {
   id        String   @id @default(cuid())
   name      String?
-  age      String?
+  age       String?
   email     String?  @unique
+  posts     Post[]
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 

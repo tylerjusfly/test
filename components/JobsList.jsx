@@ -1,12 +1,22 @@
-"use client";
 import React from "react";
 import JobItem from "./JobItem";
+import prisma from "@/lib/prisma";
 
-const JobsList = () => {
+async function getJobPost() {
+  const results = await prisma.post.findMany({
+    where: { available: true },
+  });
+
+  return results;
+}
+
+const JobsList = async () => {
+  const JobPosts = await getJobPost();
+
   return (
-    <div className="flex flex-wrap justify-between p-[4rem] gap-[3rem]">
-      {Array.from({ length: 10 }, (x) => x).map((item, i) => (
-        <JobItem key={i} />
+    <div className="grid grid-cols-3 gap-[3rem] mt-10 mx-10">
+      {JobPosts.map((item, i) => (
+        <JobItem item={item} key={i} />
       ))}
     </div>
   );

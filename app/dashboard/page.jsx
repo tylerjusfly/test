@@ -1,4 +1,3 @@
-"use client";
 import JobsList from "@/components/JobsList";
 import SearchAndFilterJobs from "@/components/SearchAndFilterJobs";
 import React from "react";
